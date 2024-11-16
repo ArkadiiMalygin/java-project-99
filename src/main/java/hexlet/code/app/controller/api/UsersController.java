@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +53,7 @@ public class UsersController {
 
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("@userUtils.isCreator(#id)")
     UserDTO update(@RequestBody UserUpdateDTO userData, @PathVariable Long id) {
         var user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not Found"));
@@ -63,6 +65,7 @@ public class UsersController {
 
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("@userUtils.isCreator(#id)")
     UserDTO show(@PathVariable Long id) {
         var user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not Found"));
@@ -71,6 +74,7 @@ public class UsersController {
 
     @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("@userUtils.isCreator(#id)")
     void delete(@PathVariable Long id) {
         repository.deleteById(id);
     }
