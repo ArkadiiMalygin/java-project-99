@@ -40,7 +40,7 @@ public class Status {
     @ToString.Include
     @NotBlank
     @Size(min = 1)
-    private String lastName;
+    private String name;
 
     @Column(unique = true)
     @ToString.Include
