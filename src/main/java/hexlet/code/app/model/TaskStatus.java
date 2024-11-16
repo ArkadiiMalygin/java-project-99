@@ -29,7 +29,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "statuses")
-public class Status {
+public class TaskStatus {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
