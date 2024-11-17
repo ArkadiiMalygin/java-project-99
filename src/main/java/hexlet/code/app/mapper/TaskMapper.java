@@ -6,7 +6,9 @@ import hexlet.code.app.dto.TaskUpdateDTO;
 import hexlet.code.app.exception.ResourceNotFoundException;
 import hexlet.code.app.model.Task;
 import hexlet.code.app.model.TaskStatus;
+import hexlet.code.app.model.User;
 import hexlet.code.app.repository.TaskStatusRepository;
+import hexlet.code.app.repository.UserRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -26,9 +28,12 @@ public abstract class TaskMapper {
     @Autowired
     private TaskStatusRepository taskStatusRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Mapping(target = "name", source = "title")
     @Mapping(target = "description", source = "content")
-    @Mapping(target = "assignee", source = "assigneeId")
+    @Mapping(target = "assignee",qualifiedByName = "getAssigneeFromAssigneeId", source = "assignee_id")
     @Mapping(target = "taskStatus",qualifiedByName = "getTaskStatusFromStatus", source = "status")
     public abstract Task map(TaskCreateDTO model);
 
@@ -49,5 +54,10 @@ public abstract class TaskMapper {
     TaskStatus getTaskStatusFromStatus(String status) {
         return taskStatusRepository.findBySlug(status)
                 .orElseThrow(() -> new ResourceNotFoundException("no status with this name yet: " + status));
+    }
+    @Named("getAssigneeFromAssigneeId")
+    User getAssigneeFromAssigneeId(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("no users with this id yet: " + id));
     }
 }

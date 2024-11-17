@@ -53,7 +53,7 @@ public class TaskStatus {
     @EqualsAndHashCode.Include
     private String slug;
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate

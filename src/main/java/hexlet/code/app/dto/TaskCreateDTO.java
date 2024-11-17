@@ -20,7 +20,7 @@ public class TaskCreateDTO {
     @NotBlank
     private String status;
 
-    private Long assigneeId;
+    private Long assignee_id;
 
 
 }
