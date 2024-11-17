@@ -42,17 +42,18 @@ public class Task {
     @Size(min = 1)
     private String name;
 
-    private String Long;
+    private Long index;
 
+    @ToString.Include
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ToString.Include
     @NotBlank
-    @OneToMany(mappedBy = "slug", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Status taskStatus;
+    @ManyToOne
+    private TaskStatus taskStatus;
 
     @ToString.Include
-    @NotBlank
     @ManyToOne
     private User assignee;
 
