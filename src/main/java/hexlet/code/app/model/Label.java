@@ -1,15 +1,6 @@
 package hexlet.code.app.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -18,7 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,8 +22,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @EntityListeners(AuditingEntityListener.class)
 @ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "task_statuses")
-public class TaskStatus {
+@Table(name = "labels")
+public class Label {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -43,17 +33,15 @@ public class TaskStatus {
 
     @ToString.Include
     @NotBlank
-    @Size(min = 1)
+    @Size(min = 3)
+    @EqualsAndHashCode.Include
+    @Column(unique = true)
     private String name;
 
-    @Column(unique = true)
-    @ToString.Include
-    @NotBlank
-    @Size(min = 1)
-    @EqualsAndHashCode.Include
-    private String slug;
-
-    @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "task_labels",
+            joinColumns = @JoinColumn(name = "label_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"))
     private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate
@@ -61,11 +49,11 @@ public class TaskStatus {
 
     public void addTask(Task task) {
         tasks.add(task);
-        task.setTaskStatus(this);
+        task.getLabels().add(this);
     }
 
     public void removeTask(Task task) {
         tasks.remove(task);
-        task.setTaskStatus(null);
+        task.getLabels().remove(this);
     }
 }

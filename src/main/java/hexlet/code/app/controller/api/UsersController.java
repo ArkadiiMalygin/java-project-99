@@ -3,6 +3,7 @@ package hexlet.code.app.controller.api;
 import hexlet.code.app.dto.UserCreateDTO;
 import hexlet.code.app.dto.UserDTO;
 import hexlet.code.app.dto.UserUpdateDTO;
+import hexlet.code.app.exception.EntityIsConnectedToOthers;
 import hexlet.code.app.exception.ResourceNotFoundException;
 import hexlet.code.app.mapper.UserMapper;
 import hexlet.code.app.repository.UserRepository;
@@ -76,7 +77,13 @@ public class UsersController {
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("@userUtils.isCreator(#id)")
     void delete(@PathVariable Long id) {
-        repository.deleteById(id);
+        var user = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found: " + id));
+        if (user.getTasks().isEmpty()) {
+            repository.deleteById(id);
+        } else {
+            throw new EntityIsConnectedToOthers("user has some unfinished tasks " + user.getTasks());
+        }
     }
 
 }

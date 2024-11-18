@@ -1,5 +1,6 @@
 package hexlet.code.app.handler;
 
+import hexlet.code.app.exception.EntityIsConnectedToOthers;
 import hexlet.code.app.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,5 +14,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(EntityIsConnectedToOthers.class)
+    public ResponseEntity<String> EntityIsConnectedToOthers(EntityIsConnectedToOthers ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 }

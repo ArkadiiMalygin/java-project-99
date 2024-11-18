@@ -1,14 +1,6 @@
 package hexlet.code.app.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,6 +12,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -58,6 +52,19 @@ public class Task {
     @ManyToOne
     private User assignee;
 
+    @ManyToMany(mappedBy = "tasks")
+    private List<Label> labels = new ArrayList<>();
+
     @CreatedDate
     private LocalDate createdAt;
+
+    public void addLabel(Label label) {
+        labels.add(label);
+        label.getTasks().add(this);
+    }
+
+    public void removeLabel(Label label) {
+        labels.remove(label);
+        label.getTasks().remove(this);
+    }
 }

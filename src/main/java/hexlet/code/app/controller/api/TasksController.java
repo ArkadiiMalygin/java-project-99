@@ -2,37 +2,33 @@ package hexlet.code.app.controller.api;
 
 import hexlet.code.app.dto.TaskCreateDTO;
 import hexlet.code.app.dto.TaskDTO;
-import hexlet.code.app.dto.TaskStatusCreateDTO;
-import hexlet.code.app.dto.TaskStatusDTO;
-import hexlet.code.app.dto.TaskStatusUpdateDTO;
+import hexlet.code.app.dto.TaskParamsDTO;
+
 import hexlet.code.app.dto.TaskUpdateDTO;
 import hexlet.code.app.mapper.TaskMapper;
-import hexlet.code.app.mapper.TaskStatusMapper;
+
 import hexlet.code.app.repository.TaskRepository;
-import hexlet.code.app.repository.TaskStatusRepository;
+
 import hexlet.code.app.service.TaskService;
-import hexlet.code.app.service.TaskStatusService;
+
+import hexlet.code.app.specification.TaskSpecification;
 import hexlet.code.app.util.UserUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class TasksController {
+
+    @Autowired
+    private TaskSpecification specBuilder;
 
     @Autowired
     private TaskRepository taskRepository;
@@ -48,12 +44,25 @@ public class TasksController {
 
     @GetMapping("/tasks")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<TaskDTO>> index() {
-        var tasks = taskService.getAll();
+    Page<TaskDTO> index(@RequestParam(defaultValue = "1") int page,
+                        @RequestParam(defaultValue = "") String titleCont,
+                        @RequestParam(defaultValue = "0") Long assigneeId,
+                        @RequestParam(defaultValue = "") String status,
+                        @RequestParam(defaultValue = "0") Long labelId) {
 
-        return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(tasks.size()))
-                .body(tasks);
+        var taskParams = new TaskParamsDTO();
+        if (!titleCont.equals("")) { taskParams.setTitleCont(titleCont);}
+        if (assigneeId != 0) { taskParams.setAssigneeId(assigneeId);}
+        if (!titleCont.equals("")) { taskParams.setStatus(status);}
+        if (labelId != 0) { taskParams.setLabelId(labelId);}
+
+        var spec = specBuilder.build(taskParams);
+
+        var tasks = taskRepository.findAll(spec, PageRequest.of(page - 1, 10));
+
+        var res = tasks.map(taskMapper::map);
+
+        return res;
     }
 
     @PostMapping("/tasks")
