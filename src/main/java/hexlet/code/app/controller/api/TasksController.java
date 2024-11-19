@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class TasksController {
 
     @GetMapping("/tasks")
     @ResponseStatus(HttpStatus.OK)
-    Page<TaskDTO> index(@RequestParam(defaultValue = "1") int page,
+    ResponseEntity<Page<TaskDTO>> index(@RequestParam(defaultValue = "1") int page,
                         @RequestParam(defaultValue = "") String titleCont,
                         @RequestParam(defaultValue = "0") Long assigneeId,
                         @RequestParam(defaultValue = "") String status,
@@ -53,7 +54,7 @@ public class TasksController {
         var taskParams = new TaskParamsDTO();
         if (!titleCont.equals("")) { taskParams.setTitleCont(titleCont);}
         if (assigneeId != 0) { taskParams.setAssigneeId(assigneeId);}
-        if (!titleCont.equals("")) { taskParams.setStatus(status);}
+        if (!status.equals("")) { taskParams.setStatus(status);}
         if (labelId != 0) { taskParams.setLabelId(labelId);}
 
         var spec = specBuilder.build(taskParams);
@@ -62,7 +63,9 @@ public class TasksController {
 
         var res = tasks.map(taskMapper::map);
 
-        return res;
+        return ResponseEntity.ok()
+                .header("X-Total-Count", String.valueOf(taskRepository.count()))
+                .body(res);
     }
 
     @PostMapping("/tasks")
