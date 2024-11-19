@@ -38,12 +38,15 @@ public abstract class UserMapper {
     @Mapping(target = "passwordDigest", source = "password")
     public abstract User map(UserCreateDTO model);
 
-    @Mapping(target = "username", source = "email")
+    //TODO
+    //@Mapping(target = "username", source = "email")
     //@Mapping(target = "password", ignore = true)
-    @Mapping(target = "tasksTitle", qualifiedByName = "getTitles", source = "tasks")
+    //TODO
+    //@Mapping(target = "tasksTitle", qualifiedByName = "getTitles", source = "tasks")
     public abstract UserDTO map(User model);
 
-    @Mapping(target = "email", source = "username")
+    //TODO
+    //@Mapping(target = "email", source = "username")
     public abstract User map(UserDTO model);
 
     @Mapping(target = "passwordDigest", source = "password")

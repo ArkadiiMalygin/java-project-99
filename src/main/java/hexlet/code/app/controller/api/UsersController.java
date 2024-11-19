@@ -74,7 +74,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/users/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("@userUtils.isCreator(#id)")
     void delete(@PathVariable Long id) {
         var user = repository.findById(id)

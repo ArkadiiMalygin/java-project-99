@@ -12,13 +12,15 @@ import java.util.List;
 public class UserDTO {
     private Long id;
 
-    private String username;
+    //TODO
+    private String email;
 
     private String firstName;
 
     private String lastName;
 
-    private List<String> tasksTitle;
+    //TODO
+    //private List<String> tasksTitle;
 
     private LocalDate createdAt;
 }
