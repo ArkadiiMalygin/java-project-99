@@ -30,12 +30,13 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "users")
+
 public class User implements UserDetails, BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)

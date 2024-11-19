@@ -17,12 +17,13 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "labels")
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "labels")
+
 public class Label {
 
     @Id

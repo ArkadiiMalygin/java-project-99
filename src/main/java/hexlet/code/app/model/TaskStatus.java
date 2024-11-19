@@ -27,12 +27,13 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "task_statuses")
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "task_statuses")
+
 public class TaskStatus {
 
     @Id
@@ -46,14 +47,14 @@ public class TaskStatus {
     @Size(min = 1)
     private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "slug")
     @ToString.Include
     @NotBlank
     @Size(min = 1)
     @EqualsAndHashCode.Include
     private String slug;
 
-    @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate

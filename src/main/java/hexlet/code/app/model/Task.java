@@ -18,12 +18,13 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "tasks")
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @ToString(includeFieldNames = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "tasks")
+
 public class Task {
 
     @Id
@@ -46,6 +47,7 @@ public class Task {
     @ToString.Include
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "status_id")
     private TaskStatus taskStatus;
 
     @ToString.Include
