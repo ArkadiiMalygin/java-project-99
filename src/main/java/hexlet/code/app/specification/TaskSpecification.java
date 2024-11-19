@@ -2,11 +2,16 @@ package hexlet.code.app.specification;
 
 import hexlet.code.app.dto.TaskParamsDTO;
 import hexlet.code.app.model.Task;
+import hexlet.code.app.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TaskSpecification {
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     public Specification<Task> build(TaskParamsDTO params) {
         return withTitleCont(params.getTitleCont())
@@ -28,6 +33,6 @@ public class TaskSpecification {
     }
 
     private Specification<Task> withLabelId(Long labelId) {
-        return ((root, query, criteriaBuilder) -> labelId == null ? criteriaBuilder.conjunction() : criteriaBuilder.equal(root.get("labels").get("id"), labelId));
+        return ((root, query, criteriaBuilder) -> labelId == null ? criteriaBuilder.conjunction() : criteriaBuilder.equal(root.join("labels").get("id"), labelId));
     }
 }

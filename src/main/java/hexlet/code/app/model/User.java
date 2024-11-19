@@ -58,7 +58,7 @@ public class User implements UserDetails, BaseEntity {
     @NotBlank
     private String passwordDigest;
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Task> tasks = new ArrayList<>();
 
     @LastModifiedDate

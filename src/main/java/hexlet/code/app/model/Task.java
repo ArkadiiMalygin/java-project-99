@@ -50,6 +50,7 @@ public class Task {
 
     @ToString.Include
     @ManyToOne
+    @JoinColumn(name = "assignee_id")
     private User assignee;
 
     @ManyToMany(mappedBy = "tasks")
@@ -58,13 +59,21 @@ public class Task {
     @CreatedDate
     private LocalDate createdAt;
 
+    public void setLabels(List<Label> labelsToAdd) {
+        labelsToAdd.forEach(l -> l.addTask(this));
+        labels.addAll(labelsToAdd);
+    }
+
+    public void removeLabels(List<Label> labelsToRemove) {
+        labelsToRemove.forEach(l -> l.removeTask(this));
+        labels.removeAll(labelsToRemove);
+    }
+
     public void addLabel(Label label) {
         labels.add(label);
-        label.getTasks().add(this);
     }
 
     public void removeLabel(Label label) {
         labels.remove(label);
-        label.getTasks().remove(this);
     }
 }

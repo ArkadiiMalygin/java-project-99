@@ -3,16 +3,23 @@ package hexlet.code.app.mapper;
 import hexlet.code.app.dto.UserCreateDTO;
 import hexlet.code.app.dto.UserDTO;
 import hexlet.code.app.dto.UserUpdateDTO;
+import hexlet.code.app.exception.ResourceNotFoundException;
+import hexlet.code.app.model.Task;
 import hexlet.code.app.model.User;
+import hexlet.code.app.repository.TaskRepository;
 import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mapper(
         uses = {JsonNullableMapper.class, ReferenceMapper.class},
@@ -21,6 +28,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class UserMapper {
+
+    @Autowired
+    private TaskRepository taskRepository;
+
     @Autowired
     private BCryptPasswordEncoder encoder;
 
@@ -29,6 +40,7 @@ public abstract class UserMapper {
 
     @Mapping(target = "username", source = "email")
     //@Mapping(target = "password", ignore = true)
+    @Mapping(target = "tasksTitle", qualifiedByName = "getTitles", source = "tasks")
     public abstract UserDTO map(User model);
 
     @Mapping(target = "email", source = "username")
@@ -41,5 +53,14 @@ public abstract class UserMapper {
     public void encryptPassword(UserCreateDTO data) {
         var password = data.getPassword();
         data.setPassword(encoder.encode(password));
+    }
+
+    @Named("getTitles")
+    List<String> getTitles(List<Task> tasks) {
+        var tasksNames = new ArrayList<String>();
+        for (Task t : tasks) {
+            tasksNames.add(t.getName());
+        }
+        return tasksNames;
     }
 }

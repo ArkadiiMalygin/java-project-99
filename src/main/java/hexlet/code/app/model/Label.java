@@ -49,11 +49,19 @@ public class Label {
 
     public void addTask(Task task) {
         tasks.add(task);
-        task.getLabels().add(this);
     }
 
     public void removeTask(Task task) {
         tasks.remove(task);
-        task.getLabels().remove(this);
+    }
+
+    public void setTasks(List<Task> tasksToAdd) {
+        tasksToAdd.forEach(t -> t.addLabel(this));
+        tasks.addAll(tasksToAdd);
+    }
+
+    public void removeTasks(List<Task> tasksToRemove) {
+        tasksToRemove.forEach(t -> t.removeLabel(this));
+        tasks.removeAll(tasksToRemove);
     }
 }
