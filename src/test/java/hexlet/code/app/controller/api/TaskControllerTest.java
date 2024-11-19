@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.MockMvcExtensionsKt.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Order(4)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class TaskControllerTest {
 
@@ -69,8 +69,8 @@ public class TaskControllerTest {
         testTask = Instancio.of(modelGenerator.getTaskModel())
                 .set(Select.field(Task::getAssignee), null)
                 .create();
-        testTask.setTaskStatus(taskStatus);
-        testTask.setLabels(List.of(label));
+        testTask.setTaskStatus(taskStatus.getSlug());
+        testTask.setLabels(Set.of(label.getId()));
     }
 
     @Order(1)

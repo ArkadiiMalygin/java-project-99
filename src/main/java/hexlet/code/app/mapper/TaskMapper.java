@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Mapper(
         uses = {JsonNullableMapper.class, ReferenceMapper.class},
@@ -41,9 +42,9 @@ public abstract class TaskMapper {
 
     @Mapping(target = "name", source = "title")
     @Mapping(target = "description", source = "content")
-    @Mapping(target = "assignee",qualifiedByName = "getAssigneeFromAssigneeId", source = "assignee_id")
+    @Mapping(target = "assignee", source = "assignee_id")
     @Mapping(target = "taskStatus",qualifiedByName = "getTaskStatusFromStatus", source = "status")
-    @Mapping(target = "labels",qualifiedByName = "getLabelsFromListOfLabelNames", source = "labels")
+    @Mapping(target = "labels",qualifiedByName = "getLabelsFromListOfLabelId", source = "taskLabelIds")
     public abstract Task map(TaskCreateDTO model);
 
     @Mapping(target = "title", source = "name")
@@ -57,8 +58,8 @@ public abstract class TaskMapper {
     @Mapping(target = "name", source = "title")
     @Mapping(target = "description", source = "content")
     @Mapping(target = "assignee", source = "assigneeId")
-    @Mapping(target = "taskStatus", source = "status")
-    @Mapping(target = "labels",qualifiedByName = "getLabelsFromListOfLabelNamesAndAddThem", source = "labels")
+    @Mapping(target = "taskStatus", qualifiedByName = "getTaskStatusFromStatus", source = "status")
+    @Mapping(target = "labels",qualifiedByName = "getLabelsFromListOfLabelNamesAndAddThem", source = "taskLabelIds")
     public abstract void update(TaskUpdateDTO update, @MappingTarget Task destination);
 
     @Named("getTaskStatusFromStatus")
@@ -66,17 +67,17 @@ public abstract class TaskMapper {
         return taskStatusRepository.findBySlug(status)
                 .orElseThrow(() -> new ResourceNotFoundException("no status with this name yet: " + status));
     }
-    @Named("getAssigneeFromAssigneeId")
-    User getAssigneeFromAssigneeId(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("no users with this id yet: " + id));
-    }
+//    @Named("getAssigneeFromAssigneeId")
+//    User getAssigneeFromAssigneeId(Long id) {
+//        return userRepository.findById(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("no users with this id yet: " + id));
+//    }
 
-    @Named("getLabelsFromListOfLabelNames")
-    List<Label> getLabelsFromListOfLabelNames(List<String> labels) {
+    @Named("getLabelsFromListOfLabelId")
+    List<Label> getLabelsFromListOfLabelNames(Set<Long> taskLabelIds) {
         var resLabels = new ArrayList<Label>();
-        for (String labelName : labels) {
-            var label = labelRepository.findByName(labelName)
+        for (Long labelName : taskLabelIds) {
+            var label = labelRepository.findById(labelName)
                     .orElseThrow(() -> new ResourceNotFoundException("no label with this name yet: " + labelName));
             resLabels.add(label);
         }
@@ -93,11 +94,11 @@ public abstract class TaskMapper {
     }
 
     @Named("getLabelsFromListOfLabelNamesAndAddThem")
-    List<Label> getLabelsFromListOfLabelNamesAndAddThem(List<String> labels) {
+    List<Label> getLabelsFromListOfLabelNamesAndAddThem(Set<Long> labels) {
         var resLabels = new ArrayList<Label>();
-        for (String labelName : labels) {
-            resLabels.add(labelRepository.findByName(labelName)
-                    .orElseThrow(() -> new ResourceNotFoundException("no label with this name yet: " + labelName)));
+        for (Long labelId : labels) {
+            resLabels.add(labelRepository.findById(labelId)
+                    .orElseThrow(() -> new ResourceNotFoundException("no label with this name yet: " + labelId)));
         }
         return resLabels;
     }

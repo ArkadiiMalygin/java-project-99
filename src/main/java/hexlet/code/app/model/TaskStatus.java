@@ -20,6 +20,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,11 +55,11 @@ public class TaskStatus {
     @EqualsAndHashCode.Include
     private String slug;
 
-    @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "taskStatus")
     private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate
-    private LocalDate createdAt;
+    private Instant createdAt;
 
     public void addTask(Task task) {
         tasks.add(task);
@@ -67,6 +68,6 @@ public class TaskStatus {
 
     public void removeTask(Task task) {
         tasks.remove(task);
-        task.setTaskStatus(null);
+        task.setTaskStatus((TaskStatus) null);
     }
 }

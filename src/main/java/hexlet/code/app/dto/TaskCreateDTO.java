@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,5 +25,5 @@ public class TaskCreateDTO {
 
     private Long assignee_id;
 
-    private List<String> labels;
+    private Set<Long> taskLabelIds;
 }

@@ -11,6 +11,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,30 +45,33 @@ public class Task {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @ToString.Include
+
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "status_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_status_id")
     private TaskStatus taskStatus;
 
-    @ToString.Include
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id")
     private User assignee;
 
-    @ManyToMany(mappedBy = "tasks")
+    @ManyToMany
+    @JoinTable(name = "task_labels",
+            joinColumns = @JoinColumn(name = "label_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id"))
     private List<Label> labels = new ArrayList<>();
 
     @CreatedDate
-    private LocalDate createdAt;
+    private Instant createdAt;
 
     public void setLabels(List<Label> labelsToAdd) {
-        labelsToAdd.forEach(l -> l.addTask(this));
+//        labelsToAdd.forEach(l -> l.addTask(this));
         labels.addAll(labelsToAdd);
     }
 
     public void removeLabels(List<Label> labelsToRemove) {
-        labelsToRemove.forEach(l -> l.removeTask(this));
+//        labelsToRemove.forEach(l -> l.removeTask(this));
         labels.removeAll(labelsToRemove);
     }
 

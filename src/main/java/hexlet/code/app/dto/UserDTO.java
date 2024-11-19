@@ -4,6 +4,7 @@ import hexlet.code.app.model.Task;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,5 +23,5 @@ public class UserDTO {
     //TODO
     //private List<String> tasksTitle;
 
-    private LocalDate createdAt;
+    private Instant createdAt;
 }

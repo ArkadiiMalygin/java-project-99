@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class TaskDTO {
 
     private List<String> labels;
 
-    private LocalDate createdAt;
+    private Instant createdAt;
 
 
 }

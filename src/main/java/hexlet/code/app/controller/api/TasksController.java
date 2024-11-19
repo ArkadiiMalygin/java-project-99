@@ -17,11 +17,13 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -45,27 +47,14 @@ public class TasksController {
 
     @GetMapping("/tasks")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<Page<TaskDTO>> index(@RequestParam(defaultValue = "1") int page,
-                        @RequestParam(defaultValue = "") String titleCont,
-                        @RequestParam(defaultValue = "0") Long assigneeId,
-                        @RequestParam(defaultValue = "") String status,
-                        @RequestParam(defaultValue = "0") Long labelId) {
+    ResponseEntity<List<TaskDTO>> index(TaskParamsDTO taskParams) {
 
-        var taskParams = new TaskParamsDTO();
-        if (!titleCont.equals("")) { taskParams.setTitleCont(titleCont);}
-        if (assigneeId != 0) { taskParams.setAssigneeId(assigneeId);}
-        if (!status.equals("")) { taskParams.setStatus(status);}
-        if (labelId != 0) { taskParams.setLabelId(labelId);}
+        List<TaskDTO> tasks = taskService.findAll(taskParams);
 
-        var spec = specBuilder.build(taskParams);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Count", String.valueOf(tasks.size()));
 
-        var tasks = taskRepository.findAll(spec, PageRequest.of(page - 1, 10));
-
-        var res = tasks.map(taskMapper::map);
-
-        return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(taskRepository.count()))
-                .body(res);
+        return new ResponseEntity<>(tasks, headers, HttpStatus.OK);
     }
 
     @PostMapping("/tasks")

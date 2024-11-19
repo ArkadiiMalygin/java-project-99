@@ -43,6 +43,7 @@ public abstract class UserMapper {
     //@Mapping(target = "password", ignore = true)
     //TODO
     //@Mapping(target = "tasksTitle", qualifiedByName = "getTitles", source = "tasks")
+    //@Mapping(target = "tasksTitle", qualifiedByName = "getTitles", source = "tasks")
     public abstract UserDTO map(User model);
 
     //TODO

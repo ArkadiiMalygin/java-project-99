@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,30 +40,30 @@ public class Label {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "task_labels",
-            joinColumns = @JoinColumn(name = "label_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"))
-    private List<Task> tasks = new ArrayList<>();
+//    @ManyToMany(cascade = CascadeType.ALL)
+////    @JoinTable(name = "task_labels",
+////            joinColumns = @JoinColumn(name = "label_id", referencedColumnName = "id"),
+////            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"))
+//    private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate
-    private LocalDate createdAt;
+    private Instant createdAt;
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    public void removeTask(Task task) {
-        tasks.remove(task);
-    }
-
-    public void setTasks(List<Task> tasksToAdd) {
-        tasksToAdd.forEach(t -> t.addLabel(this));
-        tasks.addAll(tasksToAdd);
-    }
-
-    public void removeTasks(List<Task> tasksToRemove) {
-        tasksToRemove.forEach(t -> t.removeLabel(this));
-        tasks.removeAll(tasksToRemove);
-    }
+//    public void addTask(Task task) {
+//        tasks.add(task);
+//    }
+//
+//    public void removeTask(Task task) {
+//        tasks.remove(task);
+//    }
+//
+//    public void setTasks(List<Task> tasksToAdd) {
+//        tasksToAdd.forEach(t -> t.addLabel(this));
+//        tasks.addAll(tasksToAdd);
+//    }
+//
+//    public void removeTasks(List<Task> tasksToRemove) {
+//        tasksToRemove.forEach(t -> t.removeLabel(this));
+//        tasks.removeAll(tasksToRemove);
+//    }
 }
