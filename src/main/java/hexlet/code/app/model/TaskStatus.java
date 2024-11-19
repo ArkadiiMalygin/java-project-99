@@ -59,7 +59,7 @@ public class TaskStatus {
     private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate
-    private Instant createdAt;
+    private LocalDate createdAt;
 
     public void addTask(Task task) {
         tasks.add(task);

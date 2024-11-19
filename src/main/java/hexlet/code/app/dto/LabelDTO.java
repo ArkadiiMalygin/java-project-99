@@ -13,5 +13,5 @@ public class LabelDTO {
 
     private String name;
 
-    private Instant createdAt;
+    private LocalDate createdAt;
 }

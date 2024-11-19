@@ -13,11 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import hexlet.code.app.AppApplication;
-import hexlet.code.app.util.TestUtils;
 import org.springframework.web.context.WebApplicationContext;
 
+import hexlet.code.app.util.TestUtils;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
@@ -32,13 +30,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import hexlet.code.app.util.ModelGenerator;
-import hexlet.code.app.model.Label;
+import hexlet.code.app.modelfortests.Label;
 
 @Order(2)
-@ContextConfiguration(classes = AppApplication.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class LabelControllerTest {
+public class LabelTest {
 
     @Autowired
     private WebApplicationContext wac;

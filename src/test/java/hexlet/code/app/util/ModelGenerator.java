@@ -1,17 +1,15 @@
 package hexlet.code.app.util;
 
-import hexlet.code.app.model.Label;
-import hexlet.code.app.model.Task;
-import hexlet.code.app.model.TaskStatus;
-import hexlet.code.app.model.User;
-import jakarta.annotation.PostConstruct;
-import lombok.Getter;
-import net.datafaker.Faker;
+import hexlet.code.app.modelfortests.Label;
+import hexlet.code.app.modelfortests.TaskStatus;
+import hexlet.code.app.modelfortests.User;
 import org.instancio.Instancio;
 import org.instancio.Model;
 import org.instancio.Select;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import hexlet.code.app.modelfortests.Task;
+import lombok.Getter;
+import net.datafaker.Faker;
 
 @Getter
 public class ModelGenerator {

@@ -4,18 +4,19 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import hexlet.code.app.model.Label;
-import hexlet.code.app.model.Task;
-import hexlet.code.app.model.TaskStatus;
-import hexlet.code.app.model.User;
+import hexlet.code.app.modelfortests.Task;
+import hexlet.code.app.modelfortests.TaskStatus;
+import hexlet.code.app.modelfortests.User;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
+
+import java.util.List;
+
+import hexlet.code.app.modelfortests.Label;
 
 public class TestUtils {
     private static ObjectMapper om = new ObjectMapper()
@@ -101,4 +102,3 @@ public class TestUtils {
                 .orElse(null);
     }
 }
-

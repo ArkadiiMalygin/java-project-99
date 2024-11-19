@@ -51,7 +51,7 @@ public abstract class TaskMapper {
     @Mapping(target = "content", source = "description")
     @Mapping(target = "assigneeId", source = "assignee.id")
     @Mapping(target = "status", source = "taskStatus.slug")
-    @Mapping(target = "labels",qualifiedByName = "getLabelsNamesFromListOfLabels", source = "labels")
+    @Mapping(target = "taskLabelIds",qualifiedByName = "getLabelsNamesFromListOfLabels", source = "labels")
     public abstract TaskDTO map(Task model);
 
 
@@ -85,10 +85,10 @@ public abstract class TaskMapper {
     }
 
     @Named("getLabelsNamesFromListOfLabels")
-    List<String> getLabelsNamesFromListOfLabels(List<Label> labels) {
-        var resLabelNames = new ArrayList<String>();
+    List<Long> getLabelsNamesFromListOfLabels(List<Label> labels) {
+        var resLabelNames = new ArrayList<Long>();
         for (Label label : labels) {
-            resLabelNames.add(label.getName());
+            resLabelNames.add(label.getId());
         }
         return resLabelNames;
     }

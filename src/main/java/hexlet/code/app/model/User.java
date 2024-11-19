@@ -64,10 +64,10 @@ public class User implements UserDetails, BaseEntity {
     private List<Task> tasks = new ArrayList<>();
 
     @LastModifiedDate
-    private Instant updateAt;
+    private LocalDate updateAt;
 
     @CreatedDate
-    private Instant createdAt;
+    private LocalDate createdAt;
 
     public void addTask(Task task) {
         tasks.add(task);

@@ -23,5 +23,5 @@ public class UserDTO {
     //TODO
     //private List<String> tasksTitle;
 
-    private Instant createdAt;
+    private LocalDate createdAt;
 }

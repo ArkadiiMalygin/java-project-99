@@ -26,9 +26,9 @@ public class TaskDTO {
 
     private Long assigneeId;
 
-    private List<String> labels;
+    private List<Long> taskLabelIds;
 
-    private Instant createdAt;
+    private LocalDate createdAt;
 
 
 }

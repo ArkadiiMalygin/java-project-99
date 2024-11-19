@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-
-import hexlet.code.app.util.ModelGenerator;
 import org.junit.jupiter.api.Order;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 
@@ -38,14 +36,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 
 import hexlet.code.app.util.TestUtils;
-import hexlet.code.app.model.User;
-
-
+import hexlet.code.app.modelfortests.User;
+import hexlet.code.app.util.ModelGenerator;
 
 @Order(1)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class UserTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -202,4 +199,3 @@ public class UserControllerTest {
         assertNull(actualUser);
     }
 }
-

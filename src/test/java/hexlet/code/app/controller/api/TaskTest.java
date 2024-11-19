@@ -1,43 +1,44 @@
 package hexlet.code.app.controller.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.app.model.Task;
-import hexlet.code.app.util.ModelGenerator;
+import java.nio.charset.StandardCharsets;
+
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.web.context.WebApplicationContext;
+
+import hexlet.code.app.modelfortests.Task;
 import hexlet.code.app.util.TestUtils;
 import org.instancio.Instancio;
 import org.instancio.Select;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
+import java.util.HashMap;
 
-import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.MockMvcExtensionsKt.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import hexlet.code.app.util.ModelGenerator;
 
 @Order(4)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class TaskControllerTest {
+public class TaskTest {
 
     @Autowired
     private WebApplicationContext wac;
