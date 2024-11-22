@@ -16,6 +16,11 @@ version = "0.0.1-SNAPSHOT"
 
 application { mainClass.set("hexlet.code.app.AppApplication") }
 
+repositories {
+	mavenCentral()
+	maven { url = uri("https://repo.spring.io/milestone") }
+	maven { url = uri("https://repo.spring.io/snapshot") }
+}
 
 dependencies {
 
@@ -46,6 +51,10 @@ dependencies {
 	runtimeOnly("com.h2database:h2:2.2.224")
 	testImplementation(platform("org.junit:junit-bom:5.10.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compileOnly("org.projectlombok:lombok:1.18.36")
+
 }
 
 tasks.test {
