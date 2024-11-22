@@ -49,11 +49,12 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 	runtimeOnly("com.h2database:h2:2.2.224")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.security:spring-security-test")
-	testImplementation(platform("org.junit:junit-bom:5.10.1"))
-	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
-	testImplementation("org.junit.platform:junit-platform-launcher")
+	//testI -> i
+	implementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.security:spring-security-test")
+	implementation(platform("org.junit:junit-bom:5.10.1"))
+	implementation("org.junit.jupiter:junit-jupiter:5.10.1")
+	implementation("org.junit.platform:junit-platform-launcher")
 
 }
 
