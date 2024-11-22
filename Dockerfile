@@ -8,7 +8,7 @@ WORKDIR ./
 
 COPY ./ .
 
-RUN ./gradlew --no-daemon build
+RUN ./gradlew installDist
 
 EXPOSE 8080
 
