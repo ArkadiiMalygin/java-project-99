@@ -48,6 +48,7 @@ dependencies {
 	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	implementation("net.datafaker:datafaker:2.0.2")
 
+	runtimeOnly("org.postgresql:postgresql")
 	runtimeOnly("com.h2database:h2:2.2.224")
 	testImplementation(platform("org.junit:junit-bom:5.10.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
@@ -57,7 +58,7 @@ dependencies {
 
 }
 
-tasks.test {
+tasks.withType<Test> {
 	useJUnitPlatform()
 	testLogging {
 		exceptionFormat = TestExceptionFormat.FULL
