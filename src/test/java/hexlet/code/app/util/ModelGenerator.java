@@ -3,12 +3,12 @@ package hexlet.code.app.util;
 import hexlet.code.app.modelfortests.Label;
 import hexlet.code.app.modelfortests.TaskStatus;
 import hexlet.code.app.modelfortests.User;
+import lombok.Getter;
 import org.instancio.Instancio;
 import org.instancio.Model;
 import org.instancio.Select;
 
 import hexlet.code.app.modelfortests.Task;
-import lombok.Getter;
 import net.datafaker.Faker;
 
 @Getter

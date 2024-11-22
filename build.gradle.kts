@@ -54,7 +54,7 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
-	compileOnly("org.projectlombok:lombok:1.18.36")
+	//	compileOnly("org.projectlombok:lombok:1.18.36")
 
 }
 

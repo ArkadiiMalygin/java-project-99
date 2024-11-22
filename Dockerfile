@@ -1,9 +1,15 @@
-FROM gradle:8.8.0-jdk17
+FROM eclipse-temurin:20-jdk
+
+ARG GRADLE_VERSION=8.4
+
+RUN apt-get update && apt-get install -yq make unzip
 
 WORKDIR ./
 
 COPY ./ .
 
-RUN gradle installDist
+RUN ./gradlew --no-daemon build
+
+EXPOSE 8080
 
 CMD ./build/install/java-project-99/bin/java-project-99
