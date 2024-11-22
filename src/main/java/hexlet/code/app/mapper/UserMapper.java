@@ -3,7 +3,6 @@ package hexlet.code.app.mapper;
 import hexlet.code.app.dto.UserCreateDTO;
 import hexlet.code.app.dto.UserDTO;
 import hexlet.code.app.dto.UserUpdateDTO;
-import hexlet.code.app.exception.ResourceNotFoundException;
 import hexlet.code.app.model.Task;
 import hexlet.code.app.model.User;
 import hexlet.code.app.repository.TaskRepository;

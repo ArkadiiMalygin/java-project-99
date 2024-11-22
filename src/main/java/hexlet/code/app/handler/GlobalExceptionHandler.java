@@ -17,7 +17,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(EntityIsConnectedToOthers.class)
-    public ResponseEntity<String> EntityIsConnectedToOthers(EntityIsConnectedToOthers ex) {
+    public ResponseEntity<String> entityIsConnectedToOthers(EntityIsConnectedToOthers ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 }

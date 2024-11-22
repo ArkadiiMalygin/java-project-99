@@ -22,7 +22,8 @@ public class UserUtils {
     }
 
     public boolean isCreator(long id) {
-        var creatorEmail = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("This user id: " + id + "does not exist")).getEmail();
+        var creatorEmail = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("This user id: " + id + "does not exist")).getEmail();
         var authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
         return creatorEmail.equals(authenticationName);
     }

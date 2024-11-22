@@ -1,6 +1,12 @@
 package hexlet.code.app.model;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -10,10 +16,9 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.Instant;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 

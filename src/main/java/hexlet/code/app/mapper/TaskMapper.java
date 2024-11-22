@@ -7,7 +7,6 @@ import hexlet.code.app.exception.ResourceNotFoundException;
 import hexlet.code.app.model.Label;
 import hexlet.code.app.model.Task;
 import hexlet.code.app.model.TaskStatus;
-import hexlet.code.app.model.User;
 import hexlet.code.app.repository.LabelRepository;
 import hexlet.code.app.repository.TaskStatusRepository;
 import hexlet.code.app.repository.UserRepository;
@@ -42,16 +41,16 @@ public abstract class TaskMapper {
 
     @Mapping(target = "name", source = "title")
     @Mapping(target = "description", source = "content")
-    @Mapping(target = "assignee", source = "assignee_id")
-    @Mapping(target = "taskStatus",qualifiedByName = "getTaskStatusFromStatus", source = "status")
-    @Mapping(target = "labels",qualifiedByName = "getLabelsFromListOfLabelId", source = "taskLabelIds")
+    @Mapping(target = "assignee", source = "assigneeId")
+    @Mapping(target = "taskStatus", qualifiedByName = "getTaskStatusFromStatus", source = "status")
+    @Mapping(target = "labels", qualifiedByName = "getLabelsFromListOfLabelId", source = "taskLabelIds")
     public abstract Task map(TaskCreateDTO model);
 
     @Mapping(target = "title", source = "name")
     @Mapping(target = "content", source = "description")
     @Mapping(target = "assigneeId", source = "assignee.id")
     @Mapping(target = "status", source = "taskStatus.slug")
-    @Mapping(target = "taskLabelIds",qualifiedByName = "getLabelsNamesFromListOfLabels", source = "labels")
+    @Mapping(target = "taskLabelIds", qualifiedByName = "getLabelsNamesFromListOfLabels", source = "labels")
     public abstract TaskDTO map(Task model);
 
 
@@ -59,7 +58,7 @@ public abstract class TaskMapper {
     @Mapping(target = "description", source = "content")
     @Mapping(target = "assignee", source = "assigneeId")
     @Mapping(target = "taskStatus", qualifiedByName = "getTaskStatusFromStatus", source = "status")
-    @Mapping(target = "labels",qualifiedByName = "getLabelsFromListOfLabelNamesAndAddThem", source = "taskLabelIds")
+    @Mapping(target = "labels", qualifiedByName = "getLabelsFromListOfLabelNamesAndAddThem", source = "taskLabelIds")
     public abstract void update(TaskUpdateDTO update, @MappingTarget Task destination);
 
     @Named("getTaskStatusFromStatus")

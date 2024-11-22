@@ -4,7 +4,6 @@ import hexlet.code.app.dto.LabelCreateDTO;
 import hexlet.code.app.dto.LabelDTO;
 import hexlet.code.app.dto.LabelUpdateDTO;
 
-import hexlet.code.app.exception.EntityIsConnectedToOthers;
 import hexlet.code.app.exception.ResourceNotFoundException;
 import hexlet.code.app.mapper.LabelMapper;
 
