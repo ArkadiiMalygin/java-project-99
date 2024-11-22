@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+
+import hexlet.code.app.AppApplication;
 import org.junit.jupiter.api.Order;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 
@@ -40,6 +42,7 @@ import hexlet.code.app.modelfortests.User;
 import hexlet.code.app.util.ModelGenerator;
 
 @Order(1)
+@ContextConfiguration(classes = AppApplication.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class UserTest {

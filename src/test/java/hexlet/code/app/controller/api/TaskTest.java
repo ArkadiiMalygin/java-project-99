@@ -12,6 +12,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import hexlet.code.app.AppApplication;
 import org.springframework.web.context.WebApplicationContext;
 
 import hexlet.code.app.modelfortests.Task;
@@ -36,6 +38,7 @@ import java.util.HashMap;
 import hexlet.code.app.util.ModelGenerator;
 
 @Order(4)
+@ContextConfiguration(classes = AppApplication.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class TaskTest {
