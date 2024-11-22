@@ -3,6 +3,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
 	application
+	checkstyle
+	jacoco
 	id("io.freefair.lombok") version "8.6"
 	id("org.springframework.boot") version "3.4.0-SNAPSHOT"
 	id("io.spring.dependency-management") version "1.1.6"
@@ -58,15 +60,21 @@ dependencies {
 
 }
 
+tasks.jacocoTestReport {
+	reports {
+		xml.required.set(true)
+	}
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
-//	testLogging {
-//		exceptionFormat = TestExceptionFormat.FULL
-//		events = mutableSetOf(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
-//		// showStackTraces = true
-//		// showCauses = true
-//		showStandardStreams = true
-//	}
+	testLogging {
+		exceptionFormat = TestExceptionFormat.FULL
+		events = mutableSetOf(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
+		// showStackTraces = true
+		// showCauses = true
+		showStandardStreams = true
+	}
 }
 //TODO Sentry setup
 //buildscript {
