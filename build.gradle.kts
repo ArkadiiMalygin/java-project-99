@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-
+	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -40,7 +40,7 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.5.5.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
-	implementation("org.springframework.boot:spring-boot-starter")
+
 
 	implementation("org.instancio:instancio-junit:3.6.0")
 	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
@@ -60,6 +60,8 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
+	testImplementation("org.skyscreamer:jsonassert:1.5.1")
+	implementation("org.liquibase:liquibase-core")
 }
 
 tasks.jacocoTestReport {
