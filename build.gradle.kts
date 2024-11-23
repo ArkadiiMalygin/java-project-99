@@ -60,8 +60,9 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
-	testImplementation("org.skyscreamer:jsonassert:1.5.1")
-	implementation("org.liquibase:liquibase-core")
+// makes DeDefaultCacheAwareContextLoaderDelegate.java:145
+// testImplementation("org.skyscreamer:jsonassert:1.5.1")
+//	implementation("org.liquibase:liquibase-core")
 }
 
 tasks.jacocoTestReport {
