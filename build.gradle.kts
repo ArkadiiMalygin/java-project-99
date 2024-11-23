@@ -42,9 +42,9 @@ dependencies {
 
 
 
-	implementation("org.instancio:instancio-junit:3.6.0")
-	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
-	implementation("net.datafaker:datafaker:2.0.2")
+	testImplementation("org.instancio:instancio-junit:3.6.0")
+	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
+	testImplementation("net.datafaker:datafaker:2.0.2")
 	//runtimeOnly -> implementation
 	runtimeOnly("org.postgresql:postgresql")
 	runtimeOnly("com.h2database:h2:2.2.224")
