@@ -57,7 +57,7 @@ dependencies {
 	testImplementation("org.junit.platform:junit-platform-launcher")
 	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 
-	implementation("org.projectlombok:lombok:1.18.30")
+	compileOnly("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
