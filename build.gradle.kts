@@ -14,7 +14,7 @@ version = "0.0.1-SNAPSHOT"
 
 
 application {
-	mainClass.set("hexlet.code.AppApplication")
+	mainClass.set("hexlet.code.app.AppApplication")
 }
 
 repositories {
@@ -46,8 +46,8 @@ dependencies {
 	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	implementation("net.datafaker:datafaker:2.0.2")
 	//runtimeOnly -> implementation
-	implementation("org.postgresql:postgresql")
-	implementation("com.h2database:h2:2.2.224")
+	runtimeOnly("org.postgresql:postgresql")
+	runtimeOnly("com.h2database:h2:2.2.224")
 
 	//testI -> i (not working)
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -55,6 +55,7 @@ dependencies {
 	testImplementation(platform("org.junit:junit-bom:5.10.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 	testImplementation("org.junit.platform:junit-platform-launcher")
+	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 
 	implementation("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
