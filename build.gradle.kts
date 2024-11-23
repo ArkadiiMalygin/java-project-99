@@ -56,7 +56,7 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 	testImplementation("org.junit.platform:junit-platform-launcher")
 
-	compileOnly("org.projectlombok:lombok:1.18.30")
+	implementation("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
