@@ -45,9 +45,9 @@ dependencies {
 	implementation("org.instancio:instancio-junit:3.6.0")
 	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	implementation("net.datafaker:datafaker:2.0.2")
-
-	runtimeOnly("org.postgresql:postgresql")
-	runtimeOnly("com.h2database:h2:2.2.224")
+	//runtimeOnly -> implementation
+	implementation("org.postgresql:postgresql")
+	implementation("com.h2database:h2:2.2.224")
 
 	//testI -> i (not working)
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
