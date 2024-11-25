@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 
 @Getter
@@ -20,5 +20,5 @@ public class UserDTO {
     @Schema(description = "Users surname")
     private String lastName;
     @Schema(description = "UsersCreation instance")
-    private LocalDate createdAt;
+    private Instant createdAt;
 }
