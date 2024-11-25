@@ -57,10 +57,6 @@ public class LabelService {
     public void delete(Long id) {
         var label = labelRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found: " + id));
-//        if (label.getTasks().isEmpty()) {
             labelRepository.deleteById(id);
-//        } else {
-//            throw new EntityIsConnectedToOthers("label is used for these tasks: " + label.getTasks());
-//        }
     }
 }
