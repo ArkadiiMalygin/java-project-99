@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import hexlet.code.app.AppApplication;
+import hexlet.code.AppApplication;
 import hexlet.code.app.util.ModelGenerator;
 import hexlet.code.app.util.TestUtils;
 import org.springframework.web.context.WebApplicationContext;

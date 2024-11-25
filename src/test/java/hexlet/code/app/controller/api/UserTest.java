@@ -8,7 +8,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
-import hexlet.code.app.AppApplication;
+import hexlet.code.AppApplication;
 import org.junit.jupiter.api.Order;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 

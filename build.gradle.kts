@@ -14,7 +14,7 @@ version = "0.0.1-SNAPSHOT"
 
 
 application {
-	mainClass.set("hexlet.code.app.AppApplication")
+	mainClass.set("hexlet.code.AppApplication")
 }
 
 repositories {
