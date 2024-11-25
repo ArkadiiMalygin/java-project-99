@@ -66,11 +66,12 @@ dependencies {
 //	implementation("org.liquibase:liquibase-core")
 }
 
-//tasks.jacocoTestReport {
-//	reports {
-//		xml.required.set(true)
-//	}
-//}
+tasks.jacocoTestReport {
+	reports {
+		dependsOn(tasks.test)
+		reports { xml.required.set(true) }
+	}
+}
 
 tasks.test {
 	useJUnitPlatform()
