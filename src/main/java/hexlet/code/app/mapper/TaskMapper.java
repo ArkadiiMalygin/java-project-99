@@ -66,11 +66,6 @@ public abstract class TaskMapper {
         return taskStatusRepository.findBySlug(status)
                 .orElseThrow(() -> new ResourceNotFoundException("no status with this name yet: " + status));
     }
-//    @Named("getAssigneeFromAssigneeId")
-//    User getAssigneeFromAssigneeId(Long id) {
-//        return userRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("no users with this id yet: " + id));
-//    }
 
     @Named("getLabelsFromListOfLabelId")
     List<Label> getLabelsFromListOfLabelNames(Set<Long> taskLabelIds) {
