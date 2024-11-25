@@ -1,6 +1,7 @@
 package hexlet.code.app.controller;
 
 
+import hexlet.code.app.exception.EntityIsConnectedToOthers;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WelcomeController {
     @GetMapping(path = "/welcome")
     public String welcome() {
-        return "Welcome to Spring!";
+        throw new EntityIsConnectedToOthers("tuut");
+        //return "Welcome to Spring!";
     }
 }

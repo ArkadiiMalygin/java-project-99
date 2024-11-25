@@ -6,7 +6,7 @@ plugins {
 	id("org.springframework.boot") version "3.2.4"
 	id("io.spring.dependency-management") version "1.1.4"
 	id("com.github.ben-manes.versions") version "0.50.0"
-//	id("io.sentry.jvm.gradle") version "4.13.0"
+	id("io.sentry.jvm.gradle") version "4.13.0"
 }
 
 group = "hexlet.code"
@@ -75,21 +75,17 @@ dependencies {
 tasks.test {
 	useJUnitPlatform()
 }
-//TODO Sentry setup
-//buildscript {
-//	repositories {
-//		mavenCentral()
-//	}
-//}
-//SENTRY_AUTH_TOKEN=sntrys_eyJpYXQiOjE3MzIwMzIwMDMuNzUwNDcsInVybCI6Imh0dHBzOi8vc2VudHJ5LmlvIiwicmVnaW9uX3VybCI6Imh
-// 0dHBzOi8vZGUuc2VudHJ5LmlvIiwib3JnIjoiYXJrYWRpaW1hbHlnaW4ifQ==_53XZ5FUVRiMKZbmoTMkT1maywUqF84NZwRmeEByzIU8
-//sentry {
-//	// Generates a JVM (Java, Kotlin, etc.) source bundle and uploads your source code to Sentry.
-//	// This enables source context, allowing you to see your source
-//	// code as part of your stack traces in Sentry.
-//	includeSourceContext = true
-//
-//	org = "arkadiimalygin"
-//	projectName = "java-spring-boot"
-//	authToken = System.getenv("SENTRY_AUTH_TOKEN")
-//}
+
+sentry {
+	// Generates a JVM (Java, Kotlin, etc.) source bundle and uploads your source code to Sentry.
+	// This enables source context, allowing you to see your source
+	// code as part of your stack traces in Sentry.
+	includeSourceContext = true
+
+	org = "arkadiimalygin"
+	projectName = "java-spring-boot"
+	authToken = System.getenv("SENTRY_AUTH_TOKEN")
+}
+tasks.sentryBundleSourcesJava {
+	enabled = System.getenv("SENTRY_AUTH_TOKEN") != null
+}
