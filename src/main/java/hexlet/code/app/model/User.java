@@ -21,7 +21,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -65,7 +65,7 @@ public class User implements UserDetails, BaseEntity {
     private LocalDate updateAt;
 
     @CreatedDate
-    private LocalDate createdAt;
+    private Instant createdAt;
 
     public void addTask(Task task) {
         tasks.add(task);
