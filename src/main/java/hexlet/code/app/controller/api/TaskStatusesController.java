@@ -7,6 +7,8 @@ import hexlet.code.app.dto.TaskStatusUpdateDTO;
 import hexlet.code.app.mapper.TaskStatusMapper;
 import hexlet.code.app.repository.TaskStatusRepository;
 import hexlet.code.app.service.TaskStatusService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Statuses", description = "Methods that can be used for statuses")
 public class TaskStatusesController {
 
     @Autowired
@@ -42,6 +45,7 @@ public class TaskStatusesController {
 
     @GetMapping("/task_statuses")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "All statusesInfo")
     ResponseEntity<List<TaskStatusDTO>> index() {
         var taskStatuses = taskStatusService.getAll();
 
@@ -52,6 +56,7 @@ public class TaskStatusesController {
 
     @PostMapping("/task_statuses")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create status requires data")
     TaskStatusDTO create(@Valid @RequestBody TaskStatusCreateDTO taskStatusData) {
         var taskStatusDto = taskStatusService.create(taskStatusData);
         return taskStatusDto;
@@ -59,6 +64,7 @@ public class TaskStatusesController {
 
     @GetMapping("/task_statuses/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "StatusInfo by itsID")
     TaskStatusDTO show(@PathVariable Long id) {
         var taskStatusDto = taskStatusService.findById(id);
         return taskStatusDto;
@@ -66,6 +72,7 @@ public class TaskStatusesController {
 
     @PutMapping("/task_statuses/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update StatusInfo by itsID requires some data to update")
     TaskStatusDTO update(@RequestBody @Valid TaskStatusUpdateDTO taskStatusUpdateDTO, @PathVariable Long id) {
         var taskStatusDto = taskStatusService.update(taskStatusUpdateDTO, id);
         return taskStatusDto;
@@ -73,6 +80,7 @@ public class TaskStatusesController {
 
     @DeleteMapping("/task_statuses/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete status by itsID")
     void destroy(@PathVariable Long id) {
         taskStatusService.delete(id);
     }

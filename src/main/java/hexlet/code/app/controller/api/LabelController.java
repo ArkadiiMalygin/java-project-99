@@ -11,6 +11,8 @@ import hexlet.code.app.repository.LabelRepository;
 import hexlet.code.app.service.LabelService;
 
 import hexlet.code.app.util.UserUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Labels", description = "Methods that can be used for labels")
 public class LabelController {
 
     @Autowired
@@ -45,6 +48,7 @@ public class LabelController {
 
     @GetMapping("/labels")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "All labelsInfo")
     ResponseEntity<List<LabelDTO>> index() {
         var labels = labelService.getAll();
 
@@ -55,6 +59,7 @@ public class LabelController {
 
     @PostMapping("/labels")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create label requires data")
     LabelDTO create(@Valid @RequestBody LabelCreateDTO labelData) {
         var labelDto = labelService.create(labelData);
         return labelDto;
@@ -62,6 +67,7 @@ public class LabelController {
 
     @GetMapping("/labels/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "LabelsInfo by itsID")
     LabelDTO show(@PathVariable Long id) {
         var labelDto = labelService.findById(id);
         return labelDto;
@@ -69,6 +75,7 @@ public class LabelController {
 
     @PutMapping("/labels/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update LabelsInfo by itsID requires some data to update")
     LabelDTO update(@RequestBody @Valid LabelUpdateDTO labelUpdateDTO, @PathVariable Long id) {
         var labelDto = labelService.update(labelUpdateDTO, id);
         return labelDto;
@@ -76,6 +83,7 @@ public class LabelController {
 
     @DeleteMapping("/labels/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete label by itsID")
     void destroy(@PathVariable Long id) {
         labelService.delete(id);
     }

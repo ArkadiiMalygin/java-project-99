@@ -13,6 +13,8 @@ import hexlet.code.app.service.TaskService;
 
 import hexlet.code.app.specification.TaskSpecification;
 import hexlet.code.app.util.UserUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +37,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Tasks", description = "Methods that can be used for tasks")
 public class TasksController {
 
     @Autowired
@@ -54,6 +57,7 @@ public class TasksController {
 
     @GetMapping("/tasks")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "All tasksInfo")
     ResponseEntity<List<TaskDTO>> index(TaskParamsDTO taskParams) {
 
         List<TaskDTO> tasks = taskService.findAll(taskParams);
@@ -66,6 +70,7 @@ public class TasksController {
 
     @PostMapping("/tasks")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create task requires data")
     TaskDTO create(@Valid @RequestBody TaskCreateDTO taskData) {
         var taskDto = taskService.create(taskData);
         return taskDto;
@@ -73,6 +78,7 @@ public class TasksController {
 
     @GetMapping("/tasks/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "TasksInfo by itsID")
     TaskDTO show(@PathVariable Long id) {
         var taskDto = taskService.findById(id);
         return taskDto;
@@ -80,6 +86,7 @@ public class TasksController {
 
     @PutMapping("/tasks/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update TasksInfo by itsID requires some data to update")
     TaskDTO update(@RequestBody @Valid TaskUpdateDTO taskUpdateDTO, @PathVariable Long id) {
         var taskDto = taskService.update(taskUpdateDTO, id);
         return taskDto;
@@ -87,6 +94,7 @@ public class TasksController {
 
     @DeleteMapping("/tasks/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete task by itsID")
     void destroy(@PathVariable Long id) {
         taskService.delete(id);
     }

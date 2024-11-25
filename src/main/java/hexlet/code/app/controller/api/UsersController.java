@@ -7,6 +7,8 @@ import hexlet.code.app.exception.EntityIsConnectedToOthers;
 import hexlet.code.app.exception.ResourceNotFoundException;
 import hexlet.code.app.mapper.UserMapper;
 import hexlet.code.app.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Users", description = "Methods that can be used for users")
 public class UsersController {
     @Autowired
     private UserRepository repository;
@@ -34,6 +37,7 @@ public class UsersController {
     private UserMapper userMapper;
 
     @GetMapping("/users")
+    @Operation(summary = "All usersInfo")
     ResponseEntity<List<UserDTO>> index() {
         var users = repository.findAll();
         var result = users.stream()
@@ -46,6 +50,7 @@ public class UsersController {
 
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create user requires data")
     UserDTO create(@Valid @RequestBody UserCreateDTO userData) {
         var user = userMapper.map(userData);
         repository.save(user);
@@ -55,6 +60,7 @@ public class UsersController {
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("@userUtils.isCreator(#id)")
+    @Operation(summary = "update UsersInfo by itsID requires some data to update you must be that user")
     UserDTO update(@RequestBody UserUpdateDTO userData, @PathVariable Long id) {
         var user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not Found"));
@@ -67,6 +73,7 @@ public class UsersController {
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("@userUtils.isCreator(#id)")
+    @Operation(summary = "User Info by itsID you must be that user")
     UserDTO show(@PathVariable Long id) {
         var user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not Found"));
@@ -76,6 +83,7 @@ public class UsersController {
     @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("@userUtils.isCreator(#id)")
+    @Operation(summary = "Delete User Info by itsID you must be that user")
     void delete(@PathVariable Long id) {
         var user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found: " + id));

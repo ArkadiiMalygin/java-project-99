@@ -38,32 +38,27 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.6.0.Beta1")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.6.0.Beta1")
 
-
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
 
 	testImplementation("org.instancio:instancio-junit:3.6.0")
 	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	testImplementation("net.datafaker:datafaker:2.0.2")
-	//runtimeOnly -> implementation
+
 	runtimeOnly("org.postgresql:postgresql")
 	runtimeOnly("com.h2database:h2:2.2.224")
 
-	//testI -> i (not working)
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation(platform("org.junit:junit-bom:5.10.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
-//	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
 
-//	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 
 	testImplementation("org.junit.platform:junit-platform-launcher")
 	compileOnly("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
-// makes DeDefaultCacheAwareContextLoaderDelegate.java:145
-// testImplementation("org.skyscreamer:jsonassert:1.5.1")
-//	implementation("org.liquibase:liquibase-core")
 }
 
 tasks.jacocoTestReport {
