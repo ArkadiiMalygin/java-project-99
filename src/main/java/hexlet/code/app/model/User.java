@@ -62,7 +62,7 @@ public class User implements UserDetails, BaseEntity {
     private List<Task> tasks = new ArrayList<>();
 
     @LastModifiedDate
-    private LocalDate updateAt;
+    private Instant updateAt;
 
     @CreatedDate
     private Instant createdAt;
