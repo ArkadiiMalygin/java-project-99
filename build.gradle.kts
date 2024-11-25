@@ -4,7 +4,7 @@ plugins {
 	jacoco
 	id("io.freefair.lombok") version "8.6"
 	id("org.springframework.boot") version "3.2.4"
-	id("io.spring.dependency-management") version "1.1.6"
+	id("io.spring.dependency-management") version "1.1.4"
 	id("com.github.ben-manes.versions") version "0.50.0"
 //	id("io.sentry.jvm.gradle") version "4.13.0"
 }
@@ -19,7 +19,7 @@ application {
 
 repositories {
 	mavenCentral()
-	maven { url = uri("https://repo.spring.io/milestone") }
+//	maven { url = uri("https://repo.spring.io/milestone") }
 //	maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
@@ -43,7 +43,7 @@ dependencies {
 
 
 	testImplementation("org.instancio:instancio-junit:3.6.0")
-//	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
+	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	testImplementation("net.datafaker:datafaker:2.0.2")
 	//runtimeOnly -> implementation
 	runtimeOnly("org.postgresql:postgresql")
@@ -55,9 +55,10 @@ dependencies {
 	testImplementation(platform("org.junit:junit-bom:5.10.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 //	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
-	testImplementation("org.junit.platform:junit-platform-launcher")
-	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 
+//	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
+
+	testImplementation("org.junit.platform:junit-platform-launcher")
 	compileOnly("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
