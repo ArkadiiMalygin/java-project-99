@@ -23,9 +23,6 @@ It is a web application that helps to manage users' tasks. Here you can add, upd
 
 ## Technology stack
 
-, Security, Data JPA, Docker, H2, PostgreSQL, PaaS Render, Sentry, Swagger.
-
-### This project was build using these tools:
 | Tool                                                                        | Description                                                                                                       |
 |-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Spring Boot                                                                 | "Spring Boot is an open source Java-based framework used to create a micro Service"                               |
@@ -36,9 +33,4 @@ It is a web application that helps to manage users' tasks. Here you can add, upd
 | PaaS Render                                                                 | "Render enables the deployment and management of web services, static sites and more in a simple manner"          |
 | Sentry                                                                      | "It is a developer-first error tracking and performance monitoring platform"                                      |
 | Swagger                                                                     | "Swagger UI is a collection of HTML, JavaScript, and CSS assets that dynamically generate beautiful documentation"|
-
-
-
-
-[LIVE ON RENDER.COM](https://java-project-99-j27g.onrender.com)
 
