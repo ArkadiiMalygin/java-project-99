@@ -2,7 +2,6 @@ package hexlet.code.app.handler;
 
 import hexlet.code.app.exception.EntityIsConnectedToOthers;
 import hexlet.code.app.exception.ResourceNotFoundException;
-import io.sentry.Sentry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
