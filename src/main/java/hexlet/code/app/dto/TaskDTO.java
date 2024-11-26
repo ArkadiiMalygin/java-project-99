@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -26,7 +26,7 @@ public class TaskDTO {
     @Schema(description = "All TasksLabels")
     private List<Long> taskLabelIds;
     @Schema(description = "TasksCreationInstant")
-    private LocalDate createdAt;
+    private Instant createdAt;
 
 
 }

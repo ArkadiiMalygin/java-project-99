@@ -20,8 +20,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
-
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class TaskStatus {
     private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate
-    private LocalDate createdAt;
+    private Instant createdAt;
 
     public void addTask(Task task) {
         tasks.add(task);
