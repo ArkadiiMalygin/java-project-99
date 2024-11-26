@@ -17,7 +17,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -52,7 +52,7 @@ public class Label {
 //    private List<Task> tasks = new ArrayList<>();
 
     @CreatedDate
-    private Instant createdAt;
+    private LocalDate createdAt;
 
 //    public void addTask(Task task) {
 //        tasks.add(task);
