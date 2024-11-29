@@ -58,8 +58,8 @@ public class UsersController {
     }
 
     @PutMapping("/users/{id}")
+    @PreAuthorize(value = "@userUtils.isCreator(#id)")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("@userUtils.isCreator(#id)")
     @Operation(summary = "update UsersInfo by itsID requires some data to update you must be that user")
     UserDTO update(@RequestBody UserUpdateDTO userData, @PathVariable Long id) {
         var user = repository.findById(id)
@@ -71,8 +71,8 @@ public class UsersController {
     }
 
     @GetMapping("/users/{id}")
+    @PreAuthorize(value = "@userUtils.isCreator(#id)")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("@userUtils.isCreator(#id)")
     @Operation(summary = "User Info by itsID you must be that user")
     UserDTO show(@PathVariable Long id) {
         var user = repository.findById(id)
@@ -81,8 +81,8 @@ public class UsersController {
     }
 
     @DeleteMapping("/users/{id}")
+    @PreAuthorize(value = "@userUtils.isCreator(#id)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@userUtils.isCreator(#id)")
     @Operation(summary = "Delete User Info by itsID you must be that user")
     void delete(@PathVariable Long id) {
         var user = repository.findById(id)
