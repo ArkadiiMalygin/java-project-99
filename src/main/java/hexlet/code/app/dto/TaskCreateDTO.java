@@ -1,5 +1,6 @@
 package hexlet.code.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,6 +27,7 @@ public class TaskCreateDTO {
     @Schema(description = "TasksStatus")
     private String status;
     @Schema(description = "TasksAssigneeId")
+    @JsonProperty("assignee_id")
     private Long assigneeId;
     @Schema(description = "All TasksLabels")
     private Set<Long> taskLabelIds;

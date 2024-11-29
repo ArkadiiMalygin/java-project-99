@@ -1,5 +1,6 @@
 package hexlet.code.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,11 +23,11 @@ public class TaskUpdateDTO {
     private JsonNullable<Long> index;
     @Schema(description = "TasksContent")
     private JsonNullable<String> content;
-
     @NotBlank
     @Schema(description = "TasksStatus")
     private JsonNullable<String> status;
     @Schema(description = "TasksAssigneeId")
+    @JsonProperty("assignee_id")
     private JsonNullable<Long> assigneeId;
     @Schema(description = "All TasksLabels")
     private JsonNullable<Set<Long>> taskLabelIds;

@@ -62,6 +62,7 @@ public class TaskService {
     public TaskDTO findById(Long id) {
         var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found: " + id));
+        System.out.println(task);
         var taskDTO = taskMapper.map(task);
         return taskDTO;
     }

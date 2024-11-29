@@ -1,5 +1,6 @@
 package hexlet.code.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class TaskDTO {
     @Schema(description = "TasksStatus")
     private String status;
     @Schema(description = "TasksAssigneeId")
+    @JsonProperty("assignee_id")
     private Long assigneeId;
     @Schema(description = "All TasksLabels")
     private List<Long> taskLabelIds;
